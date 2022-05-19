@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const dataArr = [{
   id: 1,
@@ -165,6 +165,14 @@ function App() {
   const [point, setPoint] = useState(0);
 
   console.log("guessNum ==>> ", guessNum);
+
+  useEffect(() => {
+    var filtered = images.filter(image => !image.verified);
+    if (filtered.length === 0) {
+      alert("Congratulations! You completed the game.")
+      setImages(dataArr);
+    }
+  }, [images])
 
   const checkImage = (imageId) => {
     if (imageId !== guessNum) {
